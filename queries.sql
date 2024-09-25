@@ -33,3 +33,14 @@ order by average_income asc;
 --Данный запрос выводит тех продавцов и их среднюю выручку за сделку , у кого она меньше средней общей выручки за сделку по всем продовцам
 
 
+ with TAB as (SELECT case                  --Задаем каждому возрастную группу
+	when AGE between 16 and 25 then '16-25'
+	when AGE between 26 and 40 then '26-40'
+	when AGE > 40 then '40+'
+end as age_category
+from CUSTOMERS)
+select age_category, count(age_category) as age_count 
+from tab
+group by age_category; --Группируем по возрастной категории.
+
+-- Данный запрос выводит количество человек в определенных возрастных группах.
