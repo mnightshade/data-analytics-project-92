@@ -36,9 +36,10 @@ inner join products as p
     on s.product_id = p.product_id
 group by
     seller
-     HAVING(select total_avg from tab) > AVG(s.quantity * p.price) 
-    -- Условие по которому выводим данные, используя having и подзапрос
+having (select total_avg from tab) > AVG(s.quantity * p.price)
+-- Условие по которому выводим данные, используя having и подзапрос
 order by average_income asc;
+
 
 --Данный запрос выводит тех продавцов и их среднюю выручку за сделку ,
 -- у кого она меньше средней общей выручки за сделку по всем продовцам
