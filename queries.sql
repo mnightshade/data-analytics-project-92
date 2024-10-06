@@ -8,7 +8,7 @@ select
     FLOOR(SUM(s.quantity * p.price)) as income
 from sales as s
 inner join employees as e
-    on e.employee_id = s.sales_person_id
+    on s.sales_person_id = e.employee_id
 inner join products as p
     on s.product_id = p.product_id
 group by seller -- Группировка по продовцам
@@ -31,12 +31,12 @@ select
     FLOOR(AVG(s.quantity * p.price)) as average_income
 from sales as s
 inner join employees as e
-    on e.employee_id = s.sales_person_id
+    on s.sales_person_id = e.employee_id
 inner join products as p
     on s.product_id = p.product_id
 group by
     seller
-    - HAVING(select total_avg from tab) > AVG(s.quantity * p.price) 
+     HAVING(select total_avg from tab) > AVG(s.quantity * p.price) 
     -- Условие по которому выводим данные, используя having и подзапрос
 order by average_income asc;
 
